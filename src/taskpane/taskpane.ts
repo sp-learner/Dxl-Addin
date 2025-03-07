@@ -29,7 +29,7 @@ export async function run() {
 export async function applySum(context, range) {
   const sheet = context.workbook.worksheets.getActiveWorksheet();
   const targetRange = sheet.getRange(range);
-  targetRange.formulas = [["=SUM(A1:A10)"]]; // Replace with dynamic range logic
+  targetRange.formulas = [["=SUM(A1:A10)"]];
   await context.sync();
 }
 

@@ -193,7 +193,7 @@ function handleNetCalculations() {
 // }
 
 async function PutFormula() {
-  console.log("🔄 Applying fully dynamic formulas...");
+  console.log("Applying fully dynamic formulas...");
 
   await Excel.run(async (context) => {
     const sheet = context.workbook.worksheets.getActiveWorksheet();
@@ -203,7 +203,7 @@ async function PutFormula() {
 
     let data = range.values;
     if (data.length === 0 || data[0].length === 0) {
-      console.error("⚠ No data found in the sheet.");
+      console.error("No data found in the sheet.");
       return;
     }
 
@@ -217,7 +217,7 @@ async function PutFormula() {
     }
 
     if (headerRowIndex === -1) {
-      console.error("⚠ No valid header row found.");
+      console.error("No valid header row found.");
       return;
     }
 
@@ -242,7 +242,7 @@ async function PutFormula() {
     const netValueIndex = headers.indexOf("net_value");
 
     if ([wgtIndex, rateIndex, discPerIndex, valueIndex, netRateIndex, netValueIndex].includes(-1)) {
-      console.error("⚠ Required columns not found.");
+      console.error("Required columns not found.");
       return;
     }
 
@@ -267,8 +267,8 @@ async function PutFormula() {
 
     range.formulas = data;
     await context.sync();
-    console.log("✅ Fully dynamic formulas applied!");
-  }).catch(error => console.error("❌ Error in PutFormula:", error));
+    console.log("Fully dynamic formulas applied!");
+  }).catch(error => console.error("Error in PutFormula:", error));
 }
 
 function getColumnLetter(index) {

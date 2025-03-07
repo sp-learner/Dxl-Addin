@@ -27,15 +27,22 @@
 
             <div class="mb-6">
                 <h2 class="text-lg font-semibold">Upload Data</h2>
-                <button class="btn" onclick="handleRapnetUpload()">Rapnet Upload</button>
-                <button class="btn" onclick="handleSetRapaportRate()">Set Rapaport Rate</button>
+                <div>
+                    <img class="r-img" src="../../assets/Rlogo.png" alt="">
+                    <button class="btn" onclick="handleRapnetUpload()">Rapnet Upload</button>
+                </div>
+                <div> 
+                    <img class="r-img" src="../../assets/sign.png" alt="">
+                    <button class="btn" onclick="handleSetRapaportRate()">Set Rapaport Rate</button>                    
+                </div>
+                
             </div>
 
             <!-- Tools Section -->
             <div>
                 <h2 class="text-lg font-semibold">Tools</h2>
                 <button class="btn">Custom Sort</button>
-                <button class="btn">Demand Filter</button>
+                <button class="btn" onclick="UniformData()">Uniform Data</button>
                 <button class="btn">Custom Filter</button>
                 <button class="btn">Format Sheet</button>
                 <button class="btn" onclick="PutFormula()">Put Formula</button>
@@ -46,6 +53,7 @@
     </main>
 
     <script src="taskpane.js"></script>
+    <script src="../functions/Uniform.js"></script>
 </body>
 
-</html>
+</html>		

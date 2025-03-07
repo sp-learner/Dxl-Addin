@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfSynmDictionary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|BRILLIANT|RBC|BR|Round Brilliant|ROUND|RB||ROUND</Synm>
+    <Word>ROUND</Word>
+    <SortNo>1</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|HE|HB|S.HEART|HT|ROSE HEART|HRT JODI|Heart-P8-P8||HEART</Synm>
+    <Word>HEART</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|EM|E|EMERALD 4STEP|EMERALD|ASYMEMERALD4S|EM-HD|EMRALD|SQUARE EMERALD|EMR|Emerald Cut||EMERALD</Synm>
+    <Word>EMERALD</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|PE|SGP-100|PB|Pear Brilliant|PEAR MODIFIED BRILLIANT||PEAR</Synm>
+    <Word>PEAR</Word>
+    <SortNo>9</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|OB|OVAL|OV|S.OVAL|OMB|Oval Brilliant|OVL|OVAL MODIFIED BRILLIANT||OVAL</Synm>
+    <Word>OVAL</Word>
+    <SortNo>8</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|TR|TS|Triangular|TRI||TRIANGLE</Synm>
+    <Word>TRIANGLE</Word>
+    <SortNo>16</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|VVS1|VVS1-|vvs1|VVS 1|</Synm>
+    <Word>VVS1</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|VVS2|VVS 2|</Synm>
+    <Word>VVS2</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|IF|LOUPE-CLEAN|LC|Internally Flawless|</Synm>
+    <Word>IF</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>  
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI1|SI1-|SI 1|</Synm>
+    <Word>SI1</Word>
+    <SortNo>7</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI2|SI 2|</Synm>
+    <Word>SI2</Word>
+    <SortNo>8</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI3|</Synm>
+    <Word>SI3</Word>
+    <SortNo>9</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|EXCELLENT|EXC|IDEAL|EX|EX-2|EX-1|EX-3|X1|X2|X3|X4|ex1|ex2|I|Ex Ideal||EX3</Synm>
+    <Word>EX</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|VERY GOOD|V. GOOD|VG|VV|VX|V|</Synm>
+    <Word>VG</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|GOOD|GD|G|GV|GX|ex6|G|</Synm>
+    <Word>GD</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|FAIR|F|FR|FA|F|</Synm>
+    <Word>FR</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|P|POOR|PR|PU|</Synm>
+    <Word>PR</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|G.I.A|GIA|GA|GIA |</Synm>
+    <Word>GIA</Word>
+    <SortNo>1</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|IGI|</Synm>
+    <Word>IGI</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|HRD|</Synm>
+    <Word>HRD</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|CGL|</Synm>
+    <Word>CGL</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|AGS|</Synm>
+    <Word>AGS</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|NONE|NON|NC|NONCERT|NON CERT|</Synm>
+    <Word>NO-CERT</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+</ArrayOfSynmDictionary>
+
+
