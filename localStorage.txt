@@ -1,0 +1,91 @@
+// function createTableRow(column, index) {
+//   return `
+//     <td>${index + 1}</td>
+//     <td>${column.columnName}</td>
+//     <td>
+//       <select>
+//         <option value="ASC"  ${column.sortOrder === "ASC" ? "selected" : ""}>ASC</option>
+//         <option value="DESC" ${column.sortOrder === "DESC" ? "selected" : ""}>DESC</option>
+//       </select>
+//     </td>
+//     <td class="action-buttons">
+//     <div class="move-btn-group">
+//       <button class="move-up-btn" onclick="moveColumnUp(this)">↑</button>
+//       <button class="move-down-btn" onclick="moveColumnDown(this)">↓</button>
+//     </div>
+//       <button class="close-row-btn" onclick="removeColumn(this)">✕</button>
+//     </td>
+//   `;
+// }
+
+// // ==============================================
+// // 2. MOVE COLUMN FUNCTIONS
+// // ==============================================
+// function moveColumnUp(button) {
+//   const row = button.closest("tr");
+//   const prevRow = row.previousElementSibling;
+//   if (prevRow) {
+//     row.parentNode.insertBefore(row, prevRow);
+//     updateRowNumbers();
+//     // saveSortSettingsPermanently();
+//   }
+// }
+
+// function moveColumnDown(button) {
+//   const row = button.closest("tr");
+//   const nextRow = row.nextElementSibling;
+//   if (nextRow) {
+//     row.parentNode.insertBefore(nextRow, row);
+//     updateRowNumbers();
+//     // saveSortSettingsPermanently();
+//   }
+// }
+
+// function updateRowNumbers() {
+//   const rows = document.querySelectorAll("#selectedColumns tr");
+//   rows.forEach((row, index) => {
+//     row.cells[0].textContent = index + 1;
+//   });
+// }
+
+// 1. SAVE FUNCTION (With Close Button Support)
+
+// async function saveSortSettingsPermanently() {
+//   const table = document.getElementById("selectedColumns");
+//   const columns = Array.from(table.rows).map(row => ({
+//     columnName: row.cells[1].textContent.trim(),
+//     sortOrder: row.cells[2].querySelector("select").value
+//   }));
+
+//   // Save to localStorage and Office settings
+//   localStorage.setItem("customSortColumns", JSON.stringify(columns));
+//   Office.context.document.settings.set("customSortColumns", JSON.stringify(columns));
+//   Office.context.document.settings.saveAsync();
+// }
+
+// UPDATED LOAD FUNCTION (Preserves order)
+
+// function loadPersistedColumns() {
+//   const savedColumns = JSON.parse(localStorage.getItem("customSortColumns") || "[]");
+//   const tbody = document.getElementById("selectedColumns");
+//   tbody.innerHTML = "";
+
+//   savedColumns.forEach((col, index) => {
+//     const row = tbody.insertRow();
+//     row.innerHTML = createTableRow(col, index);
+//   });
+// }
+
+// //UPDATED REMOVE COLUMN FUNCTION
+
+// function removeColumn(button) {
+//   const row = button.closest("tr");
+//   const columnName = row.cells[1].textContent.trim();
+  
+//   // Add to removed columns list
+//   removedColumns.push(columnName);
+  
+//   row.remove();
+//   updateRowNumbers();
+//   refreshDropdownOptions(); // Immediate refresh
+// }

@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\OfficeAddinSetup",
     "\\src",
     "\\src\\taskpane"
   ],
-  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }

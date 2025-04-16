@@ -5,12 +5,6 @@
 
 /* global console, document, Excel, Office */
 
-Office.onReady(() => {
-  document.getElementById("sideload-msg").style.display = "none";
-  document.getElementById("app-body").style.display = "flex";
-  document.getElementById("run").onclick = run;
-});
-
 export async function run() {
   try {
     await Excel.run(async (context) => {

@@ -21,7 +21,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://sp-learner.github.io/Dxl-Addin/taskpane.html"/>
+    <SourceLocation DefaultValue="https://github.com/sp-learner/Dxl-Addin"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">

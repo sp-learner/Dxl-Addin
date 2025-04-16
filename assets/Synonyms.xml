@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfSynmDictionary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|BRILLIANT|RBC|BR|Round Brilliant|ROUND|RB||ROUND</Synm>
+    <Word>ROUND</Word>
+    <SortNo>1</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|HE|HB|S.HEART|HT|ROSE HEART|HRT JODI|Heart-P8-P8||HEART</Synm>
+    <Word>HEART</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|EM|E|EMERALD 4STEP|EMERALD|ASYMEMERALD4S|EM-HD|EMRALD|SQUARE EMERALD|EMR|Emerald Cut||EMERALD</Synm>
+    <Word>EMERALD</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|PE|SGP-100|PB|Pear Brilliant|PEAR MODIFIED BRILLIANT||PEAR</Synm>
+    <Word>PEAR</Word>
+    <SortNo>9</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|OB|OVAL|OV|S.OVAL|OMB|Oval Brilliant|OVL|OVAL MODIFIED BRILLIANT||OVAL</Synm>
+    <Word>OVAL</Word>
+    <SortNo>8</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>SHAPE</Type>
+    <Synm>|TR|TS|Triangular|TRI||TRIANGLE</Synm>
+    <Word>TRIANGLE</Word>
+    <SortNo>16</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|VVS1|VVS1-|vvs1|VVS 1|</Synm>
+    <Word>VVS1</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|VVS2|VVS 2|</Synm>
+    <Word>VVS2</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|IF|LOUPE-CLEAN|LC|Internally Flawless|</Synm>
+    <Word>IF</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>  
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI1|SI1-|SI 1|</Synm>
+    <Word>SI1</Word>
+    <SortNo>7</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI2|SI 2|</Synm>
+    <Word>SI2</Word>
+    <SortNo>8</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>PURITY</Type>
+    <Synm>|SI3|</Synm>
+    <Word>SI3</Word>
+    <SortNo>9</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|D|D*|</Synm>
+    <Word>D</Word>
+    <SortNo>1</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|E|</Synm>
+    <Word>E</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|F|F YELLO|</Synm>
+    <Word>F</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|G|RARE WHITE G|</Synm>
+    <Word>G</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|H|H-|WHITE (H)|WHITE H|</Synm>
+    <Word>H</Word>
+    <SortNo>7</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|I|</Synm>
+    <Word>I</Word>
+    <SortNo>9</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|J|</Synm>
+    <Word>J</Word>
+    <SortNo>10</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|K|K, Faint Brown|</Synm>
+    <Word>K</Word>
+    <SortNo>11</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|L|L, Faint Brown|</Synm>
+    <Word>L</Word>
+    <SortNo>12</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|M|TINTED COLOUR M|</Synm>
+    <Word>M</Word>
+    <SortNo>13</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|N|</Synm>
+    <Word>N</Word>
+    <SortNo>14</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|O|</Synm>
+    <Word>O</Word>
+    <SortNo>15</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|P|</Synm>
+    <Word>P</Word>
+    <SortNo>16</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|Q|</Synm>
+    <Word>Q</Word>
+    <SortNo>17</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|R|</Synm>
+    <Word>R</Word>
+    <SortNo>18</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|S|</Synm>
+    <Word>S</Word>
+    <SortNo>19</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|T|</Synm>
+    <Word>T</Word>
+    <SortNo>20</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|U|</Synm>
+    <Word>U</Word>
+    <SortNo>21</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|V|</Synm>
+    <Word>V</Word>
+    <SortNo>22</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|W|</Synm>
+    <Word>W</Word>
+    <SortNo>23</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|X|XYZ|</Synm>
+    <Word>X</Word>
+    <SortNo>24</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|Y|Y||Y|</Synm>
+    <Word>Y</Word>
+    <SortNo>25</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>COLOR</Type>
+    <Synm>|Z|</Synm>
+    <Word>Z</Word>
+    <SortNo>26</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|EXCELLENT|EXC|IDEAL|EX|EX-2|EX-1|EX-3|X1|X2|X3|X4|ex1|ex2|I|Ex Ideal||EX3</Synm>
+    <Word>EX</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|VERY GOOD|V. GOOD|VG|VV|VX|V|</Synm>
+    <Word>VG</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|GOOD|GD|G|GV|GX|ex6|G|</Synm>
+    <Word>GD</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|FAIR|F|FR|FA|F|</Synm>
+    <Word>FR</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>CUT</Type>
+    <Synm>|P|POOR|PR|PU|</Synm>
+    <Word>PR</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>POLISH</Type>
+    <Synm>|EX|EXCELLENT|IDEAL|X|EXC|I|</Synm>
+    <Word>EX</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>POLISH</Type>
+    <Synm>|VERY GOOD|V|V. GOOD|V.G|VG|</Synm>
+    <Word>VG</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>POLISH</Type>
+    <Synm>|GOOD|G|GD|G|</Synm>
+    <Word>GD</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>POLISH</Type>
+    <Synm>|FAIR|F|FR|FA|F|</Synm>
+    <Word>FR</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>POLISH</Type>
+    <Synm>|P|POOR|PR|</Synm>
+    <Word>PR</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|FAINT|FNT|NEGLIGIBLE|FL1|F|FA|</Synm>
+    <Word>FNT</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|M|MEDIUM|MED|FL2|MD|MB|MEDIUM BLUE|ME|MD-BL|MD-YL|</Synm>
+    <Word>MED</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|STRONG|STG|ST|FL3|S|STRONG BLUE|STR|STO|ST-BL|ST-WH|ST-YL|</Synm>
+    <Word>STG</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|VERY STRONG|VST|FL4|VSTG|VST-BL|</Synm>
+    <Word>VST</Word>
+    <SortNo>7</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|SL|SLIGHT|SLI|SLT|</Synm>
+    <Word>SLT</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>FLS</Type>
+    <Synm>|VERY SLIGHT|VSLG|VSLT|VSL|VS|</Synm>
+    <Word>VSL</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|G.I.A|GIA|GA|GIA |</Synm>
+    <Word>GIA</Word>
+    <SortNo>1</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|IGI|</Synm>
+    <Word>IGI</Word>
+    <SortNo>2</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|HRD|</Synm>
+    <Word>HRD</Word>
+    <SortNo>3</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|CGL|</Synm>
+    <Word>CGL</Word>
+    <SortNo>4</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|AGS|</Synm>
+    <Word>AGS</Word>
+    <SortNo>5</SortNo>
+  </SynmDictionary>
+  <SynmDictionary>
+    <ExtensionData />
+    <Type>LAB</Type>
+    <Synm>|NONE|NON|NC|NONCERT|NON CERT|</Synm>
+    <Word>NO-CERT</Word>
+    <SortNo>6</SortNo>
+  </SynmDictionary>
+</ArrayOfSynmDictionary>
+
+
