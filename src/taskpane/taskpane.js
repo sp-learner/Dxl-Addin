@@ -60,50 +60,140 @@
 
 // window.PutFormula = PutFormula;
 
-function handleNetCalculations() {
-  console.log("Calculating Values, NetRate, and NetValue...");
+async function PutAverage() {
+  try {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const range = sheet.getUsedRange();
+      range.load("rowCount, columnCount, values");
+      await context.sync();
 
-  Excel.run(async (context) => {
-    const sheet = context.workbook.worksheets.getActiveWorksheet();
-    const range = sheet.getUsedRange();
-    range.load("rowCount, columnCount, values");
-    await context.sync();
+      const lastDataRow = range.rowCount;
+      const summaryRow = lastDataRow + 2; // Leave one empty row below data
 
-    const rowCount = range.rowCount;
+      // Define synonyms (your provided lists)
+      const InputSynonyms = {
+        WGT: ["Weight", "TOTAL CTS","TotalCts", "Weight R","weigh", "Cts#", "SIZE#","Wt#", "Car", "Cara", "Carat", "CARATS", "Crt", "Crts", "CRTWT", "CT", "Ct.", "Cts", "Cts.", "POLISE" ,"CT" ,"Size", "SIZE." ,"Weight", "Weight ??", "Wgt" ,"WHT.", "WT", "Wt."],
+        RATE: ["Rate", "BaseRate", "Disc Price"," Full Rap Price", "List", "List Price", "List Price ????", "List Rate", "LiveRAP", "NEW RAP", "Orap", "price", "R.PRICE", "Rap", "Rap $", "Rap $/CT", "Rap List", "Rap Price", "Rap Price($)", "Rap Rate", "RAP RTE", "Rap$", "RAP($)", "Rap-Price", "RAP.", "Rap.", "Price", "Rap.($)", "Rap/Price", "Rap_per_Crt", "RAP_PRICE", "Rapa", "Rapa Rate", "Rapa_Rate", "rapaport", "RAPAPORT_RATE", "RapaportPrice", "RapaRate", "RapDown", "Rape", "RapList", "RapNet Price", "rapnetcaratprice", "RapNetPrice", "RAPO", "RAPPLIST", "rapprice", "RapRat", "RapRate", "RapRice", "RapRte", "Rate", "repRate"],
+        DISC: ["Disc", "%"," % Back"," % BELOW", "%Rap", "Asking Disc. %", "Back", "BACK %", "Back (-%)", "Back %", "Back -%", "Back%", "Base Off %", "Base Off%", "CBack", "DIC.", "DIS", "Dis %", "Dis%", "DIS.", "Disc", "Disc %", "Disc%", "Disc(%)", "DISC.", "Disc/Pre", "DISC_PER", "Disco%", "DISCOUNT", "Discount %","Discount % ??", "Discount%", "Discprct", "F disc", "Fair/Last Bid %", "Final %", "Final Disc%", "final_discount", "ListDisc%", "Net %", "New Rap%", "Off %", "Off%", "Offer Disc.(%)", "OffPer", "Price", "R.Dn", "Rap %", "RAP DIS", "Rap Disc", "Rap Disc %", "Rap Discount", "Rap%", "Rap.%", "RAP_DISCOUNT", "rap_per", "RapDis", "RapDown", "rapnet", "Rapnet", "Discount %", "RapNet Back", "Rapnet Discount", "Rapnet Discount%", "rapnetdiscount", "RapnetDiscountPercent", "RapOff", "RP Disc", "saleback", "SaleDis", "SaleDisc", "Selling Disc", "User Disc", "VDisc %"," WebsiteDiscount", "Rapdisc"],
+      };
 
-    for (let i = 1; i < rowCount; i++) {
-      const valueCell = sheet.getCell(i, 3);
-      const netRateCell = sheet.getCell(i, 4);
-      const netValueCell = sheet.getCell(i, 5);
+      const ResultSynonyms = {
+        VALUE: ["value", "rapvalue", "rapaport value", "r.value", "val", "RapVlu"],
+        NET_RATE: ["Net_Rate", "$ / Carat", "$/Carat", "$/CT", "$/CTS", "$/PC", "Asking Price", "askprice", "BACK P/Ct", "Base Rate", "Cash Price", "CashPrice", "CRate", "Ct/Price", "D.RAP PRICE", "DIS / CT", "Final Rate", "List$/Ct", "Net Rate", "NET_RATE", "P.CARAT", "P/CT", "P/CTS", "Per Crt $", "Per ct", "Per Ct $", "PerCarat", "PerCrt", "PerCts", "PPC", "PPC$", "Pr/Ct", "PRAP($)","PRI/CRT", "Price p.c", "Price $/cts", "Price / Crts", "Price Per Carat", "Price Per Crt", "Price Per Ct", "Price/Carat", "Price/Crt", "Price/Ct", "Price/Ct ($)", "Price/ct.", "Price/Cts", "Price/CTS $", "Price/Cts USD", "Price/Cts.", "PRICE_DOLLAR", "PRICE_PER_CARAT", "Price_Per_Crt", "PricePerCarat", "Rap @", "rap_prc", "RapNet Price", "RapNet Rate", "RATE", "Rate $/CT", "Rate / CT", "Rate ?", "Rate per carat as per Rapnet", "Rate($)", "RATE($/CT)", "Rate/Ct", "RP Price", "RTE", "SaleRate", "sales_price", "Selling Price", "User Price /Cts", "VALLUE", "WebsiteRate"],
+        NET_VALUE: ["net_value", "Net_Value", "$ Total", "amont", "AMOUNT", "Amount $", "Amount ?", "Amount US$", "Amount($)", "Amt", "Amt $", "Amt.", "askamount", "Asking Amount", "Back Total", "Base Amt", "CAmount", "DiscountPrice", "EST AMT", "F value", "F.Amt", "FINAL", "Final Amount", "Final Amt", "Final Amt IN $", "Final Price", "Final Value", "FINAL$", "final_amount", "FinalValue", "mspTotal", "Net", "NET VALLUE", "NET $", "Net Amt", "Net Amt($)", "Net Value", "NET_VALUE", "NetAmt", "Offer Value($)", "Rap US $", "Rapa Value", "RapNet Amount", "RapNet Price", "RP Tot$", "SaleAmt", "saledollorprice", "Stone Price", "Stone($)", "T AMT", "T Price", "T VALUE", "T. AMOUNT", "T.Amt", "Tot. Value", "Total", "TOTAL $", "Total $ as per Rapnet", "Total ($)", "TOTAL AMOUNT", "Total Amt", "Total Amt.", "Total Price", "Total$", "total_price", "TotalAmount", "TotalPrice", "TotalValue $", "User Total $", "VALUE_DOLLAR", "WebsiteAmount"],
+      };
 
-      // Formulas
-      valueCell.formulas = [[`=A${i + 1}*B${i + 1}`]];
+      // Get column letters for key columns using synonyms
+      const columns = {};
+      for (let col = 0; col < range.columnCount; col++) {
+        const header = (range.values[0][col] || "").toString().trim().toLowerCase();
+        const letter = String.fromCharCode(65 + col);
 
-      netRateCell.formulas = [[`=B${i + 1}+(B${i + 1}*C${i + 1}/100)`]];
+        // Check weight synonyms
+        if (InputSynonyms.WGT.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.weight = letter;
+        }
+        else if (InputSynonyms.DISC.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.value = letter;
+        }
+        // Check value synonyms
+        else if (ResultSynonyms.VALUE.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.value = letter;
+        }
+        // Check net_value synonyms
+        else if (ResultSynonyms.NET_VALUE.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.net_value = letter;
+        }
+        // Check rate synonyms
+        else if (InputSynonyms.RATE.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.rate = letter;
+        }
+        // Check net_rate synonyms
+        else if (ResultSynonyms.NET_RATE.some(syn => header.includes(syn.toLowerCase()))) {
+          columns.net_rate = letter;
+        }
+      }
 
-      netValueCell.formulas = [[`=A${i + 1}*E${i + 1}`]];
-    }
+      // Apply formulas and highlight results
+      for (let col = 0; col < range.columnCount; col++) {
+        const letter = String.fromCharCode(65 + col);
+        const header = (range.values[0][col] || "").toString().trim().toLowerCase();
+        const cell = sheet.getRange(`${letter}${summaryRow + 1}`);
 
-    const spacingRow = rowCount;
-    const lastRow = rowCount + 1;
-    sheet.getRange(`A${spacingRow + 1}:F${spacingRow + 1}`).values = [["", "", "", "", "", ""]];
+        // Check if current column matches any synonyms
+        const isWeight = InputSynonyms.WGT.some(syn => header.includes(syn.toLowerCase()));
+        const isDisc = InputSynonyms.DISC.some(syn => header.includes(syn.toLowerCase()));
+        const isValue = ResultSynonyms.VALUE.some(syn => header.includes(syn.toLowerCase()));
+        const isNetValue = ResultSynonyms.NET_VALUE.some(syn => header.includes(syn.toLowerCase()));
+        const isRate = InputSynonyms.RATE.some(syn => header.includes(syn.toLowerCase()));
+        const isNetRate = ResultSynonyms.NET_RATE.some((syn) => header.includes(syn.toLowerCase()));
 
-    sheet.getCell(lastRow, 0).formulas = [[`=SUM(A2:A${rowCount})`]];
-    sheet.getCell(lastRow, 3).formulas = [[`=SUM(D2:D${rowCount})`]];
-    sheet.getCell(lastRow, 5).formulas = [[`=SUM(F2:F${rowCount})`]];
+        if (isWeight || isValue || isNetValue) {
+          // SUM formula for weight/value/net_value columns
+          cell.formulas = [[`=SUM(${letter}2:${letter}${lastDataRow})`]];
+          cell.format.fill.color = "yellow";
+        } 
+        else if (isDisc) {
+          cell.formulas = [[`=AVERAGE(${letter}2:${letter}${lastDataRow})`]];
+          cell.format.fill.color = "yellow";
+        }
+        else if (isRate && columns.value && columns.weight) {
+          // value/weight for rate column
+          cell.formulas = [[`=${columns.value}${summaryRow + 1}/${columns.weight}${summaryRow + 1}`]];
+          cell.format.fill.color = "yellow";
+        }
+        else if (isNetRate && columns.net_value && columns.weight) {
+          // net_value/weight for net_rate column
+          cell.formulas = [[`=${columns.net_value}${summaryRow + 1}/${columns.weight}${summaryRow + 1}`]];
+          cell.format.fill.color = "yellow";
+        }
+      }
 
-    // Division formulas
-    sheet.getCell(lastRow, 1).formulas = [[`=D${lastRow + 1}/A${lastRow + 1}`]];
-    sheet.getCell(lastRow, 4).formulas = [[`=F${lastRow + 1}/A${lastRow + 1}`]];
+      await context.sync();
+      showToastNotification("Averages calculated successfully!");
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    showToastNotification("Failed to calculate averages", "error");
+  }
+}
 
-    const lastRowRange = sheet.getRange(`A${lastRow + 1}:F${lastRow + 1}`);
-    lastRowRange.format.fill.color = "yellow";
+// Helper function to detect column type from synonyms
+function detectColumnType(header) {
+  const headerLower = header.toLowerCase();
 
-    await context.sync();
-    console.log("All calculations, spacing, and styling applied successfully.");
-  }).catch((error) => {
-    console.error("Error in handleNetCalculations: ", error);
-  });
+  const InputSynonyms = {
+    WGT: ["Weight", "TOTAL CTS","TotalCts", "Weight R","weigh", "Cts#", "SIZE#","Wt#", "Car", "Cara", "Carat", "CARATS", "Crt", "Crts", "CRTWT", "CT", "Ct.", "Cts", "Cts.", "POLISE" ,"CT" ,"Size", "SIZE." ,"Weight", "Weight ??", "Wgt" ,"WHT.", "WT", "Wt."],
+    RATE: ["Rate", "BaseRate", "Disc Price"," Full Rap Price", "List", "List Price", "List Price ????", "List Rate", "LiveRAP", "NEW RAP", "Orap", "price", "R.PRICE", "Rap", "Rap $", "Rap $/CT", "Rap List", "Rap Price", "Rap Price($)", "Rap Rate", "RAP RTE", "Rap$", "RAP($)", "Rap-Price", "RAP.", "Rap.", "Price", "Rap.($)", "Rap/Price", "Rap_per_Crt", "RAP_PRICE", "Rapa", "Rapa Rate", "Rapa_Rate", "rapaport", "RAPAPORT_RATE", "RapaportPrice", "RapaRate", "RapDown", "Rape", "RapList", "RapNet Price", "rapnetcaratprice", "RapNetPrice", "RAPO", "RAPPLIST", "rapprice", "RapRat", "RapRate", "RapRice", "RapRte", "Rate", "repRate"],
+    DISC: ["Disc", "%"," % Back"," % BELOW", "%Rap", "Asking Disc. %", "Back", "BACK %", "Back (-%)", "Back %", "Back -%", "Back%", "Base Off %", "Base Off%", "CBack", "DIC.", "DIS", "Dis %", "Dis%", "DIS.", "Disc", "Disc %", "Disc%", "Disc(%)", "DISC.", "Disc/Pre", "DISC_PER", "Disco%", "DISCOUNT", "Discount %","Discount % ??", "Discount%", "Discprct", "F disc", "Fair/Last Bid %", "Final %", "Final Disc%", "final_discount", "ListDisc%", "Net %", "New Rap%", "Off %", "Off%", "Offer Disc.(%)", "OffPer", "Price", "R.Dn", "Rap %", "RAP DIS", "Rap Disc", "Rap Disc %", "Rap Discount", "Rap%", "Rap.%", "RAP_DISCOUNT", "rap_per", "RapDis", "RapDown", "rapnet", "Rapnet", "Discount %", "RapNet Back", "Rapnet Discount", "Rapnet Discount%", "rapnetdiscount", "RapnetDiscountPercent", "RapOff", "RP Disc", "saleback", "SaleDis", "SaleDisc", "Selling Disc", "User Disc", "VDisc %"," WebsiteDiscount", "Rapdisc"],
+  };
+
+  const ResultSynonyms = {
+    VALUE: ["value", "rapvalue", "rapaport value", "r.value", "val", "RapVlu"],
+    NET_RATE: ["Net_Rate", "$ / Carat", "$/Carat", "$/CT", "$/CTS", "$/PC", "Asking Price", "askprice", "BACK P/Ct", "Base Rate", "Cash Price", "CashPrice", "CRate", "Ct/Price", "D.RAP PRICE", "DIS / CT", "Final Rate", "List$/Ct", "Net Rate", "NET_RATE", "P.CARAT", "P/CT", "P/CTS", "Per Crt $", "Per ct", "Per Ct $", "PerCarat", "PerCrt", "PerCts", "PPC", "PPC$", "Pr/Ct", "PRAP($)","PRI/CRT", "Price p.c", "Price $/cts", "Price / Crts", "Price Per Carat", "Price Per Crt", "Price Per Ct", "Price/Carat", "Price/Crt", "Price/Ct", "Price/Ct ($)", "Price/ct.", "Price/Cts", "Price/CTS $", "Price/Cts USD", "Price/Cts.", "PRICE_DOLLAR", "PRICE_PER_CARAT", "Price_Per_Crt", "PricePerCarat", "Rap @", "rap_prc", "RapNet Price", "RapNet Rate", "RATE", "Rate $/CT", "Rate / CT", "Rate ?", "Rate per carat as per Rapnet", "Rate($)", "RATE($/CT)", "Rate/Ct", "RP Price", "RTE", "SaleRate", "sales_price", "Selling Price", "User Price /Cts", "VALLUE", "WebsiteRate"],
+    NET_VALUE: ["net_value", "Net_Value", "$ Total", "amont", "AMOUNT", "Amount $", "Amount ?", "Amount US$", "Amount($)", "Amt", "Amt $", "Amt.", "askamount", "Asking Amount", "Back Total", "Base Amt", "CAmount", "DiscountPrice", "EST AMT", "F value", "F.Amt", "FINAL", "Final Amount", "Final Amt", "Final Amt IN $", "Final Price", "Final Value", "FINAL$", "final_amount", "FinalValue", "mspTotal", "Net", "NET VALLUE", "NET $", "Net Amt", "Net Amt($)", "Net Value", "NET_VALUE", "NetAmt", "Offer Value($)", "Rap US $", "Rapa Value", "RapNet Amount", "RapNet Price", "RP Tot$", "SaleAmt", "saledollorprice", "Stone Price", "Stone($)", "T AMT", "T Price", "T VALUE", "T. AMOUNT", "T.Amt", "Tot. Value", "Total", "TOTAL $", "Total $ as per Rapnet", "Total ($)", "TOTAL AMOUNT", "Total Amt", "Total Amt.", "Total Price", "Total$", "total_price", "TotalAmount", "TotalPrice", "TotalValue $", "User Total $", "VALUE_DOLLAR", "WebsiteAmount"],
+  };
+  
+  // Check InputSynonyms
+  if (InputSynonyms.WGT.some(syn => headerLower.includes(syn.toLowerCase()))) return 'weight';
+  if (InputSynonyms.RATE.some(syn => headerLower.includes(syn.toLowerCase()))) return 'rate';
+  if (InputSynonyms.DISC.some(syn => headerLower.includes(syn.toLowerCase()))) return 'disc';
+  
+  // Check ResultSynonyms
+  if (ResultSynonyms.VALUE.some(syn => headerLower.includes(syn.toLowerCase()))) return 'value';
+  if (ResultSynonyms.NET_RATE.some(syn => headerLower.includes(syn.toLowerCase()))) return 'net_rate';
+  if (ResultSynonyms.NET_VALUE.some(syn => headerLower.includes(syn.toLowerCase()))) return 'net_value';
+  
+  return 'other';
+}
+
+// Helper function to check if column contains numeric data
+async function isNumericColumn(sheet, columnIndex) {
+  const testRange = sheet.getRangeByIndexes(1, columnIndex, 5, 1);
+  testRange.load("values");
+  await testRange.context.sync();
+  return testRange.values.some(row => !isNaN(parseFloat(row[0])));
 }
 
 // function handleAvarageFormula(){
@@ -231,8 +321,8 @@ async function PutFormula() {
 
     const ResultSynonyms = {
       VALUE: ["value", "rapvalue", "rapaport value", "r.value", "val", "RapVlu"],
-      NET_RATE: ["net_rate", "$ / Carat", "$/Carat", "$/CT", "$/CTS", "$/PC", "Asking Price", "askprice", "BACK P/Ct", "Base Rate", "Cash Price", "CashPrice", "CRate", "Ct/Price", "D.RAP PRICE", "DIS / CT", "Final Rate", "List$/Ct", "Net Rate", "NET_RATE", "P.CARAT", "P/CT", "P/CTS", "Per Crt $", "Per ct", "Per Ct $", "PerCarat", "PerCrt", "PerCts", "PPC", "PPC$", "Pr/Ct", "PRAP($)","PRI/CRT", "Price p.c", "Price $/cts", "Price / Crts", "Price Per Carat", "Price Per Crt", "Price Per Ct", "Price/Carat", "Price/Crt", "Price/Ct", "Price/Ct ($)", "Price/ct.", "Price/Cts", "Price/CTS $", "Price/Cts USD", "Price/Cts.", "PRICE_DOLLAR", "PRICE_PER_CARAT", "Price_Per_Crt", "PricePerCarat", "Rap @", "rap_prc", "RapNet Price", "RapNet Rate", "RATE", "Rate $/CT", "Rate / CT", "Rate ?", "Rate per carat as per Rapnet", "Rate($)", "RATE($/CT)", "Rate/Ct", "RP Price", "RTE", "SaleRate", "sales_price", "Selling Price", "User Price /Cts", "VALLUE", "WebsiteRate"],
-      NET_VALUE: ["net_value", "$ Total", "amont", "AMOUNT", "Amount $", "Amount ?", "Amount US$", "Amount($)", "Amt", "Amt $", "Amt.", "askamount", "Asking Amount", "Back Total", "Base Amt", "CAmount", "DiscountPrice", "EST AMT", "F value", "F.Amt", "FINAL", "Final Amount", "Final Amt", "Final Amt IN $", "Final Price", "Final Value", "FINAL$", "final_amount", "FinalValue", "mspTotal", "Net", "NET VALLUE", "NET $", "Net Amt", "Net Amt($)", "Net Value", "NET_VALUE", "NetAmt", "Offer Value($)", "Rap US $", "Rapa Value", "RapNet Amount", "RapNet Price", "RP Tot$", "SaleAmt", "saledollorprice", "Stone Price", "Stone($)", "T AMT", "T Price", "T VALUE", "T. AMOUNT", "T.Amt", "Tot. Value", "Total", "TOTAL $", "Total $ as per Rapnet", "Total ($)", "TOTAL AMOUNT", "Total Amt", "Total Amt.", "Total Price", "Total$", "total_price", "TotalAmount", "TotalPrice", "TotalValue $", "User Total $", "VALUE_DOLLAR", "WebsiteAmount"],
+      NET_RATE: ["NetRate", "$ / Carat", "$/Carat", "$/CT", "$/CTS", "$/PC", "Asking Price", "askprice", "BACK P/Ct", "Base Rate", "Cash Price", "CashPrice", "CRate", "Ct/Price", "D.RAP PRICE", "DIS / CT", "Final Rate", "List$/Ct", "Net Rate", "NET_RATE", "P.CARAT", "P/CT", "P/CTS", "Per Crt $", "Per ct", "Per Ct $", "PerCarat", "PerCrt", "PerCts", "PPC", "PPC$", "Pr/Ct", "PRAP($)","PRI/CRT", "Price p.c", "Price $/cts", "Price / Crts", "Price Per Carat", "Price Per Crt", "Price Per Ct", "Price/Carat", "Price/Crt", "Price/Ct", "Price/Ct ($)", "Price/ct.", "Price/Cts", "Price/CTS $", "Price/Cts USD", "Price/Cts.", "PRICE_DOLLAR", "PRICE_PER_CARAT", "Price_Per_Crt", "PricePerCarat", "Rap @", "rap_prc", "RapNet Price", "RapNet Rate", "RATE", "Rate $/CT", "Rate / CT", "Rate ?", "Rate per carat as per Rapnet", "Rate($)", "RATE($/CT)", "Rate/Ct", "RP Price", "RTE", "SaleRate", "sales_price", "Selling Price", "User Price /Cts", "VALLUE", "WebsiteRate"],
+      NET_VALUE: ["Net_Value", "$ Total", "amont", "AMOUNT", "Amount $", "Amount ?", "Amount US$", "Amount($)", "Amt", "Amt $", "Amt.", "askamount", "Asking Amount", "Back Total", "Base Amt", "CAmount", "DiscountPrice", "EST AMT", "F value", "F.Amt", "FINAL", "Final Amount", "Final Amt", "Final Amt IN $", "Final Price", "Final Value", "FINAL$", "final_amount", "FinalValue", "mspTotal", "Net", "NET VALLUE", "NET $", "Net Amt", "Net Amt($)", "Net Value", "NET_VALUE", "NetAmt", "Offer Value($)", "Rap US $", "Rapa Value", "RapNet Amount", "RapNet Price", "RP Tot$", "SaleAmt", "saledollorprice", "Stone Price", "Stone($)", "T AMT", "T Price", "T VALUE", "T. AMOUNT", "T.Amt", "Tot. Value", "Total", "TOTAL $", "Total $ as per Rapnet", "Total ($)", "TOTAL AMOUNT", "Total Amt", "Total Amt.", "Total Price", "Total$", "total_price", "TotalAmount", "TotalPrice", "TotalValue $", "User Total $", "VALUE_DOLLAR", "WebsiteAmount"],
     };
 
     // Find column indices (INPUT columns are required)
@@ -319,7 +409,7 @@ async function createTable() {
     expensesTable.name = "ExpensesTable";
     expensesTable.name = tableName;
 
-    expensesTable.getHeaderRowRange().values = [["Shp#", "Color", "Clarity ??", "Cut", "Polish", "Symm", "FLName", "Lab", "Weight", "NEW RAP", "Disc", "value", "net_rate", "Amount $"]];
+    expensesTable.getHeaderRowRange().values = [["Shp#", "Color", "Clarity ??", "Cut", "Polish", "Symm", "FLName", "Lab", "Weight", "NEW RAP", "Disc",  "NetRate", "Amount $", "Value"]];
 
     expensesTable.rows.add(null /*add at the end*/, [
       ["Round", "E", "VVS1", "Good", "Good", "Good", "None", "G.I.A", "0.25", "5000", "-25", "", "", ""],
@@ -329,6 +419,14 @@ async function createTable() {
       ["EM", "D", "IF", "Excellent", "Ex", "Ex", "Non", "IGI", "1.25", "15000", "30", "", "", ""],
       ["TRI", "F YELLO", "LOUPE-CLEAN", "P", "POOR", "POOR", "SL", "NONE", "1.80", "8500", "-32", "", "", ""],
       ["HE", "MIX", "SI1", "FAIR", "F", "F", "ST-YL", "HRD", "0.6", "5800", "-31", "", "", ""],
+      ["Princess",	"G",	"SI1",	"Excellent",	"Excellent",	"Excellent",	"STRONG",	"GIA",	"1.8",	"7800",	"8", "", "", ""],
+      [ "Oval",	"H",	"SI2",	"Very Good", "	Very Good",	"Very Good",	"FNT",	"IGI",	"0.95",	"6800", "32", "", "", ""]	,
+      [ "Cushion",	"I",	"I1",	"Good",	"Good",	"Good",	"SLIGHT",	"HRD",	"2.1",	"4500",	"-12", "", "", ""],
+      [ "Emerald",	"D",	"VVS1",	"Excellent",	"Excellent",	"Excellent",	"None",	"GIA",	"1.1",	"13500",	"-25", "", "", ""],
+      [ "OMB",	"E",	"VS1",	"Very Good",	"Very Good",	"Very Good",	"None",	"IGI",	"1.55",	"10500",	"-17", "", "", ""],
+      ["Radiant",	"G",	"SI1",	"Excellent",	"Excellent",	"Excellent",	"FNT",	"GIA",	"1.7",	"6800",	"8", "", "", ""],
+      ["Marquise",	"G",	"SI1",	"Poor",	"P",	"PR",	"MED",	"GIA",	"1.1",	"7500",	"-42", "", "", ""],
+      ["Round",	"H",	"SI2",	"Very Good",	"Very Good",	"Very Good",	"NON",	"IGI",	"1.3",	"6500",	"-28", "", "", ""],
     ]);
 
     // Formatting

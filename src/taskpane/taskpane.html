@@ -48,7 +48,7 @@
                                 <img src="../../assets/c.sort.png" class="icon">Set Sorting Order
                             </a>
                         </div>
-                    </div>
+                      </div>
             
                     
                    
@@ -63,26 +63,26 @@
                                 <span class="dropdown-arrow">▼</span>
                             </button>
                             <div class="dropdown-content">
-                                <a href="#">
+                                <a href="#" id="FormatSheet">
                                     <img src="../../assets/document.png" class="icon">Format Sheet
                                 </a>
-                                <a href="#" onclick="openFormatModal('custom')">
+                                <a href="#" onclick="openFormatSheetModal('custom')">
                                     <img src="../../assets/project.png" class="icon">Add Custom Format
                                 </a>
                             </div>
                         </div>
                         <button class="btn" onclick="PutFormula()"><img src="../../assets/calculator.png" class="icon"> Put Formula</button>
-                        <button class="btn"><img src="../../assets/average.png" class="icon"> Put Average</button>
+                        <button class="btn" onclick="PutAverage()"><img src="../../assets/average.png" class="icon"> Put Average</button>
                     </div>
                     <!-- <button id="openCenterDialogBtn" class="excel-dialog-btn">
-                        <img  class="icon" alt="Dialog">
-                        Open Project Dialog
+                        <img  class="icon" alt="">
+                        Open Dialog
                     </button> -->
                 </div>
             </div>
 
             <!-- Modal Overlay -->
-            <div class="modal-overlay" id="modalOverlay"></div>
+            <div class="modal-overlay" id="modalOverlay"></div> 
 
             <!-- Modal Structure -->
             <div class="modal" id="customSortModal">
@@ -90,6 +90,7 @@
                     <span>Custom Sorting</span>
                     <span class="close" id="closeModal">&times;</span>
                 </div>
+                <hr>
                 <div class="modal-body">
                     <!-- <section>
                         <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
@@ -122,8 +123,8 @@
                                 <option value="Rate">Rate</option>
                                 <option value="Disc">Disc</option>
                                 <option value="value">Value</option>
-                                <option value="net_rate">net_rate</option>
-                                <option value="net_value">net_value</option>
+                                <option value="net_rate">NetRate</option>
+                                <option value="net_value">Amount</option>
                             </select>
                             <button class="add-btn" onclick="addColumn()">Add</button>
                         </div>
@@ -151,51 +152,101 @@
                 </div>
             </div>
 
-            
-            <div class="modal" id="formatSheetModal">
-                <div class="modal-header">
-                    <span>Format Sheet Options</span>
-                    <span class="close" id="closeFormatModal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-body">
-                        <div class="column-transfer-container">
-                          <!-- Available Columns -->
-                          <div class="column-section">
-                            <h3> Columns</h3>
-                            <select id="availableColumns" multiple size="15">
-                              <option value="Packet No">Packet No</option>
-                              <option value="Status">Status</option>
-                              <option value="Shape">Shape</option>
-                              <option value="Weight">Weight</option>
-                              <option value="Color">Color</option>
-                              
-                            </select>
-                          </div>
 
-                          
-                          <div class="transfer-buttons">
-                            <button id="addColumn">&gt;</button>
-                            <button id="removeColumn">&lt;</button>
-                          </div>
-                      
-                          
-                          <div class="column-section">
-                            <h3>Columns Formatting</h3>
-                            <select id="selectedColumns" multiple size="15"></select>
-                          </div>
-                        </div>
-                      
-                        <!-- Save/Delete Buttons -->
-                        <div class="action-buttons2">
-                          <button id="saveFormat">Save Format</button>
-                          <button id="deleteFormat">Delete Format</button>
-                        </div>
-                      </div>
-                    
+            <div class="modal" id="formatSheet">
+              <div class="modal-header">
+                <span>Format Sheet</span>
+                <span class="close" id="closeModal2">&times;</span>
+              </div>
+              <hr>
+              <div class="modal-body">
+                <div class="format-buttons-container" id="savedFormatsContainer">
+                  <!-- Saved formats will appear here as buttons -->
                 </div>
+                <span id="active-format-indicator"></span>
+              </div>
             </div>
+
             
+            <div class="Formatmodal" id="formatSheetModal">
+                <div class="modal-header">
+                  <span>Custom Format Sheet</span>
+                  <span class="close" id="closeModal">&times;</span>
+                </div>
+                <hr>
+                <div class="modal-body">
+                  <!-- Column Transfer System -->
+                  <div class="column-transfer-container">
+                    <!-- Available Columns -->
+                    <div class="column-section">
+                      <h3>Columns For Ordering</h3>
+                      <select id="availableColumns" multiple size="15">
+                        <option value="Packet No">1. Packet No</option>
+                        <option value="Status">2. Status</option>
+                        <option value="Shape">3. Shape</option>
+                        <option value="Weight">4. Weight</option>
+                        <option value="Color">5. Color</option>
+                        <option value="Clarity">6. Clarity</option>
+                        <option value="Carat">7. Carat</option>
+                        <option value="Rate">8. Rate</option>
+                        <option value="Disc">9. Discount</option>
+                        <option value="NetRate">10. NetRate</option>
+                        <option value="Amount">11. Amount</option>
+                        <option value="Cut">12. Cut</option>
+                        <option value="value">13. Value</option>
+                        <option value="Symm">14. Symm</option>
+                        <option value="Fls">15. FLS</option>
+                        <option value="Lab">16. LAB</option>
+                        <option value="Length">17. Length</option>
+                        <option value="Width">18. Width</option>
+                        <option value="Depth">19. Depth</option>
+                        <option value="FancyColor">20. FancyColor</option>
+                        
+                      </select>
+                    </div>
+                    
+                    <!-- Transfer Buttons -->
+                    <div class="transfer-buttons">
+                      <button id="addColumn" onclick="transferColumns()" title="Add to formatting">&gt;</button>
+                      <button id="removeColumn" title="Remove from formatting">&lt;</button>
+                    </div>
+                    
+                    <!-- Formatting Columns -->
+                    <div class="column-section">
+                      <h3>Formatting Columns</h3>
+                      <div class="table-container">
+                        <table id="selectedColumnsTable">
+                          <thead>
+                            <tr>
+                              <th>Sr.</th>
+                              <th>Column</th>
+                            </tr>
+                          </thead>
+                          <tbody id="selectedColumnsContainer"></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Format Name -->
+                  <div class="format-name-section">
+                    <label for="formatName">Format Name:</label>
+                    <input type="text" id="formatName" placeholder="Enter format name (e.g. IDEX FORMAT)">
+                  </div>
+                  <!-- Add this near your format name input -->
+                  <div class="format-select-section">
+                    <label for="formatDropdown">Saved Formats:</label>
+                    <select id="formatDropdown"></select>
+                    <button id="newFormatBtn" class="btn-new">New</button>
+                  </div>
+                  
+                  <!-- Action Buttons -->
+                  <div class="action-buttons2">
+                    <button id="saveFormat" class="btn-save">Save Format</button>
+                    <button id="deleteFormat" class="btn-delete">Delete Format</button>
+                  </div>
+                </div>
+              </div>
 
         </div>
     </main>
@@ -203,7 +254,7 @@
     <script src="taskpane.js"></script>
     <script src="../functions/Uniform.js"></script>
     <script src="../functions/Sorting.js"></script>
-    <script src="../functions/Format.js"></script>
+    <script src="../functions/Format.js"></script> 
     
 </body>
 </html>

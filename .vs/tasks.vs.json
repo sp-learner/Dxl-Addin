@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-SetupProject1",
+      "appliesTo": "SetupProject1/",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "task-SetupProject2",
+      "appliesTo": "SetupProject2/",
+      "type": "launch"
+    }
+  ]
+}

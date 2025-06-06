@@ -169,7 +169,7 @@ const SortConfig = {
 // modal & Dropdown Content
 let allColumns = []; // Stores all available columns from the sheet
 
-document.getElementById("openModal").addEventListener("click", function() {
+document.getElementById("openModal").addEventListener("click", function () {
   document.getElementById("customSortModal").style.display = "block";
   document.getElementById("modalOverlay").style.display = "block";
   populateColumnDropdown();
@@ -183,9 +183,6 @@ function closeModal() {
   document.getElementById("modalOverlay").style.display = "none";
 }
 
-/**
- * Populates the column dropdown with all available columns
- */
 async function populateColumnDropdown() {
   const dropdown = document.getElementById("dropdown1");
   dropdown.innerHTML = '<option value="">Select Column</option>';
@@ -198,9 +195,24 @@ async function populateColumnDropdown() {
       await context.sync();
 
       if (range.values && range.values.length > 0) {
-        const option = document.createElement("option");
-        allColumns = range.values[0];
-        option.style.color = "#ff0000";
+        // Map worksheet columns to their standardized names
+        const worksheetColumns = range.values[0];
+        const standardizedColumns = worksheetColumns.map(col => {
+          // Find the standardized name for this column
+          for (const [standardName, synonyms] of Object.entries(SortConfig.columnSynonyms)) {
+            if (col === standardName || synonyms.includes(col)) {
+              return standardName;
+            }
+          }
+          return col; // Return as-is if no synonym match
+        });
+
+        // Store both original and standardized columns
+        allColumns = {
+          original: worksheetColumns,
+          standardized: [...new Set(standardizedColumns)] // Remove duplicates
+        };
+
         refreshDropdownOptions();
       }
     });
@@ -209,9 +221,6 @@ async function populateColumnDropdown() {
   }
 }
 
-/**
- * Refreshes dropdown options based on current state
- */
 function refreshDropdownOptions() {
   const dropdown = document.getElementById("dropdown1");
   const currentItems = [...document.getElementById("selectedColumns").rows]
@@ -219,21 +228,28 @@ function refreshDropdownOptions() {
 
   dropdown.innerHTML = '<option value="">Select Column</option>';
 
-  allColumns.forEach(column => {
-    if (column) {
+  allColumns.standardized.forEach((standardName, index) => {
+    if (standardName) {
       const option = document.createElement("option");
-      option.value = column;
-      option.textContent = column;
+      option.value = standardName; // Store standardized name as value
+      option.textContent = standardName; // Show standardized name
 
-      // Only disable if currently in table AND not recently removed
-      const isRemoved = removedColumns.includes(column);
-      option.disabled = currentItems.includes(column) && !isRemoved;
+      // Find matching original column name
+      const originalName = allColumns.original.find((col, i) => {
+        const synonyms = SortConfig.columnSynonyms[standardName] || [];
+        return col === standardName || synonyms.includes(col);
+      }) || standardName;
 
-      // Visual feedback
-      if (currentItems.includes(column)) {
+      option.dataset.originalName = originalName; // Store original name in data attribute
+
+      // Disable if already added
+      option.disabled = currentItems.includes(standardName) && 
+                       !removedColumns.includes(standardName);
+
+      if (currentItems.includes(standardName)) {
         option.style.color = "#ff0000";
         option.title = "Already added";
-      } else if (isRemoved) {
+      } else if (removedColumns.includes(standardName)) {
         option.title = "Removed - can re-add";
       }
 
@@ -292,7 +308,7 @@ function updateRowNumbers() {
 }
 
 // Initialize when modal opens
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   loadPersistedColumns();
 });
 
@@ -315,14 +331,13 @@ function initDialog() {
         </div>
       </div>
     `;
-    document.body.insertAdjacentHTML('beforeend', dialogHtml);
+    document.body.insertAdjacentHTML("beforeend", dialogHtml);
     sortSettingsDialog = {
       overlay: document.getElementById("sortSettingsOverlay"),
-      message: document.getElementById("sortSettingsMessage")
+      message: document.getElementById("sortSettingsMessage"),
     };
   }
 }
-
 
 // DIALOG FUNCTIONS (Reuses same DOM element)
 
@@ -336,35 +351,35 @@ function showDialog(message) {
 function hideDialog() {
   if (sortSettingsDialog) {
     sortSettingsDialog.overlay.classList.remove("active");
-    setTimeout(() => sortSettingsDialog.overlay.style.display = "none", 300);
+    setTimeout(() => (sortSettingsDialog.overlay.style.display = "none"), 300);
   }
 }
 
 // XML STORAGE FUNCTIONS
 
-const SORT_SETTINGS_FILE = 'sort_settings.xml';
+const SORT_SETTINGS_FILE = "sort_settings.xml";
 
-// Helper to escape XML 
 function escapeXml(unsafe) {
-  if (!unsafe) return '';
-  return unsafe.toString()
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
+  if (!unsafe) return "";
+  return unsafe
+    .toString()
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 // Generate XML from columns array
 function generateSortSettingsXml(columns) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<SortSettings>\n';
-  columns.forEach(col => {
+  columns.forEach((col) => {
     xml += `  <Column>\n`;
     xml += `    <Name>${escapeXml(col.columnName)}</Name>\n`;
     xml += `    <Order>${escapeXml(col.sortOrder)}</Order>\n`;
     xml += `  </Column>\n`;
   });
-  xml += '</SortSettings>';
+  xml += "</SortSettings>";
   return xml;
 }
 
@@ -374,14 +389,14 @@ function parseXmlToColumns(xmlText) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlText, "text/xml");
     const columns = [];
-    
-    xmlDoc.querySelectorAll('Column').forEach(colNode => {
+
+    xmlDoc.querySelectorAll("Column").forEach((colNode) => {
       columns.push({
-        columnName: colNode.querySelector('Name').textContent,
-        sortOrder: colNode.querySelector('Order').textContent
+        columnName: colNode.querySelector("Name").textContent,
+        sortOrder: colNode.querySelector("Order").textContent,
       });
     });
-    
+
     return columns;
   } catch (error) {
     console.error("XML parse error:", error);
@@ -392,8 +407,8 @@ function parseXmlToColumns(xmlText) {
 async function saveToXmlFile(xmlContent) {
   try {
     const db = await initializeDB();
-    const transaction = db.transaction('SortSettings', 'readwrite');
-    const store = transaction.objectStore('SortSettings');
+    const transaction = db.transaction("SortSettings", "readwrite");
+    const store = transaction.objectStore("SortSettings");
     store.put(xmlContent, SORT_SETTINGS_FILE);
   } catch (error) {
     console.error("Save error:", error);
@@ -405,14 +420,14 @@ async function loadFromXmlFile() {
   try {
     const db = await initializeDB();
     return new Promise((resolve) => {
-      const transaction = db.transaction('SortSettings', 'readonly');
-      const store = transaction.objectStore('SortSettings');
+      const transaction = db.transaction("SortSettings", "readonly");
+      const store = transaction.objectStore("SortSettings");
       const request = store.get(SORT_SETTINGS_FILE);
-      
+
       request.onsuccess = () => {
         resolve(request.result || '<?xml version="1.0"?><SortSettings></SortSettings>');
       };
-      
+
       request.onerror = () => {
         resolve('<?xml version="1.0"?><SortSettings></SortSettings>');
       };
@@ -423,7 +438,6 @@ async function loadFromXmlFile() {
   }
 }
 
-
 // UPDATED SAVE COLUMN FUNCTION
 
 // async function saveSortSettingsPermanently() {
@@ -433,13 +447,13 @@ async function loadFromXmlFile() {
 //       columnName: row.cells[1].textContent.trim(),
 //       sortOrder: row.cells[2].querySelector("select").value
 //     }));
-    
+
 //     localStorage.setItem("customSortColumns", JSON.stringify(columns));
 //     removedColumns = []; // Clear removed columns on save
 //     refreshDropdownOptions(); // Update dropdown state
-    
+
 //     showDialog(`${columns.length} column${columns.length !== 1 ? 's' : ''} saved successfully.`);
-    
+
 //   } catch (error) {
 //     showDialog("Failed to save sort settings");
 //     console.error("Save error:", error);
@@ -448,7 +462,6 @@ async function loadFromXmlFile() {
 
 // Initialize dialog when add-in loads
 Office.onReady(() => initDialog());
-
 
 /**
  * Updates the sequence numbers in the first column
@@ -501,25 +514,23 @@ function updateSortOrderNumbers() {
 //   });
 // }
 
-
 // UPGRADED MAIN FUNCTIONS XML STORAGE
 
 async function saveSortSettingsPermanently() {
   try {
     const table = document.getElementById("selectedColumns");
-    const columns = Array.from(table.rows).map(row => ({
+    const columns = Array.from(table.rows).map((row) => ({
       columnName: row.cells[1].textContent.trim(),
-      sortOrder: row.cells[2].querySelector("select").value
+      sortOrder: row.cells[2].querySelector("select").value,
     }));
-    
+
     const xml = generateSortSettingsXml(columns);
     await saveToXmlFile(xml);
-    
+
     removedColumns = [];
     refreshDropdownOptions();
-    
-    showDialog(`${columns.length} column${columns.length !== 1 ? 's' : ''} saved successfully.`);
-    
+
+    showDialog(`${columns.length} column${columns.length !== 1 ? "s" : ""} saved successfully.`);
   } catch (error) {
     showDialog("Failed to save sort settings");
     console.error("Save error:", error);
@@ -531,12 +542,12 @@ async function loadPersistedColumns() {
     const xml = await loadFromXmlFile();
     const savedColumns = parseXmlToColumns(xml);
     const tbody = document.getElementById("selectedColumns");
-    
+
     if (!tbody) {
       console.error("Table body not found");
       return;
     }
-    
+
     tbody.innerHTML = "";
     savedColumns.forEach((col, index) => {
       const row = tbody.insertRow();
@@ -555,21 +566,20 @@ async function removeColumn(button) {
   try {
     const row = button.closest("tr");
     if (!row) return;
-    
+
     const columnName = row.cells[1]?.textContent?.trim();
     if (!columnName) return;
-    
-    
+
     removedColumns.push(columnName);
-    
+
     // Update XML storage
     const xml = await loadFromXmlFile();
-    const columns = parseXmlToColumns(xml).filter(col => col.columnName !== columnName);
+    const columns = parseXmlToColumns(xml).filter((col) => col.columnName !== columnName);
     await saveToXmlFile(generateSortSettingsXml(columns));
 
     row.remove();
     updateRowNumbers();
-    if (typeof refreshDropdownOptions === 'function') {
+    if (typeof refreshDropdownOptions === "function") {
       refreshDropdownOptions();
     }
   } catch (error) {
@@ -589,10 +599,10 @@ function addColumn() {
 
   const tbody = document.getElementById("selectedColumns");
 
-  removedColumns = removedColumns.filter(col => col !== selectedColumn);
+  removedColumns = removedColumns.filter((col) => col !== selectedColumn);
 
   // Check if column already exists
-  const existingColumns = Array.from(tbody.rows).map(row => row.cells[1].textContent.trim());
+  const existingColumns = Array.from(tbody.rows).map((row) => row.cells[1].textContent.trim());
   if (existingColumns.includes(selectedColumn)) {
     console.log("Column already added!", "warning");
     return;
@@ -686,10 +696,10 @@ function getCurrentSortSettings() {
   const settings = [];
   const table = document.getElementById("selectedColumns");
 
-  Array.from(table.rows).forEach(row => {
+  Array.from(table.rows).forEach((row) => {
     settings.push({
       columnName: row.cells[1].textContent,
-      sortOrder: row.cells[2].querySelector("select").value
+      sortOrder: row.cells[2].querySelector("select").value,
     });
   });
 
@@ -697,30 +707,53 @@ function getCurrentSortSettings() {
 }
 
 /**
- * Core sorting logic for multiple columns
+ * Gets the original column name from the worksheet that matches the standard name
+ */
+function getOriginalColumnName(standardName) {
+  if (!allColumns?.original) return standardName;
+  
+  // Check exact match first
+  if (allColumns.original.includes(standardName)) {
+    return standardName;
+  }
+  
+  // Check synonyms
+  const synonyms = SortConfig.columnSynonyms[standardName] || [];
+  for (const synonym of synonyms) {
+    if (allColumns.original.includes(synonym)) {
+      return synonym;
+    }
+  }
+  
+  return standardName; // Fallback
+}
+
+/**
+ * Updated multiColumnSort to handle synonyms
  */
 function multiColumnSort(data, headers, customSortColumns) {
   return [...data].sort((rowA, rowB) => {
     for (const setting of customSortColumns) {
       const { columnName, sortOrder } = setting;
-      const colIndex = headers.findIndex(h => h === columnName);
+      
+      // Find the actual column name in the worksheet
+      const originalColName = getOriginalColumnName(columnName);
+      const colIndex = headers.findIndex(h => h === originalColName);
 
       if (colIndex === -1) continue;
 
       const valueA = rowA[colIndex];
       const valueB = rowB[colIndex];
 
-      // Skip if both values are empty
       if (!valueA && !valueB) continue;
 
       const compareResult = compareValues(valueA, valueB, columnName);
 
-      // If values are different, return the comparison result
       if (compareResult !== 0) {
         return sortOrder === "ASC" ? compareResult : -compareResult;
       }
     }
-    return 0; // All sort columns were equal
+    return 0;
   });
 }
 
@@ -752,22 +785,21 @@ function compareValues(a, b, columnName) {
   return orderA - orderB;
 }
 
-
 async function initializeDB() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('ExcelSortSettingsDB', 1);
-    
+    const request = indexedDB.open("ExcelSortSettingsDB", 1);
+
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains('SortSettings')) {
-        db.createObjectStore('SortSettings');
+      if (!db.objectStoreNames.contains("SortSettings")) {
+        db.createObjectStore("SortSettings");
       }
     };
-    
+
     request.onsuccess = (event) => {
       resolve(event.target.result);
     };
-    
+
     request.onerror = (event) => {
       console.error("IndexedDB error:", event.target.error);
       reject(event.target.error);

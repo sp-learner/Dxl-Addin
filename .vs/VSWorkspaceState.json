@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\OfficeAddinSetup",
     "\\src",
+    "\\src\\functions",
     "\\src\\taskpane"
   ],
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
